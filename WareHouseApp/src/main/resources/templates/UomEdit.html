@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<!-- Copy JQuery Link -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>	
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+
+			<div class="card-header bg-primary text-white text-center">
+				<h3>WELCOME TO UOM TYPE EDIT PAGE!</h3>
+			</div>
+
+			<div class="card-body">
+				<form id="uomRegForm" th:action="@{/uom/update}" method="POST" th:object="${uom}">
+				
+					<div class="row">
+						<div class="col-3">
+							<label>UOM ID</label>
+						</div>
+						<div class="col-4">
+							<input type="text" th:field="*{id}" class="form-control" readOnly/>
+						</div>
+						
+					</div>
+
+					<div class="row">
+						<div class="col-3">
+							<label>UOM Type</label>
+						</div>
+						<div class="col-4">
+							<select th:field="*{uomType}" class="form-control">
+								<option value="">_SELECT_</option>
+								<option value="Packaging">Packaging</option>
+								<option value=" No Packaging">No Packaging</option>
+								<option value="">_NA_</option>
+							</select>
+						</div>
+						<div class="col-5">
+							<span id="uomTypeError"></span>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-3">
+							<label>UOM Model</label>
+						</div>
+						<div class="col-4">
+							<input type="text" th:field="*{uomModel}" class="form-control"/>
+						</div>
+						<div class="col-5">
+							<span id="uomModelError"></span>
+						</div>
+					</div>
+
+
+
+					<div class="row">
+						<div class="col-3">
+							<label>Description</label>
+						</div>
+						<div class="col-4">
+							<textarea th:field="*{uomDesc}" class="form-control"></textarea>
+						</div>
+						<div class="col-5">
+							<span id="uomDescriptionError"></span>
+						</div>
+					</div>
+
+					<input type="submit" value="Edit Uom Type" class="btn btn-success"/>
+				</form>
+
+			</div> <!-- Card Body end -->
+			
+		</div>
+		<!-- card end -->
+
+	</div>
+	<!-- container end -->
+	<script th:src="@{/js/shipment.js}"></script>
+</body>
+</html>

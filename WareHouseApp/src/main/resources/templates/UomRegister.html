@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<!-- Copy JQuery Link -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+
+			<div class="card-header  bg-primary text-white text-center">
+				<h3>Welcome to Uom Register Page</h3>
+			</div>
+			<div class="card-body">
+				<form  id="uomRegForm" th:action="@{/uom/save}" method="post">
+
+					<div class="row">
+						<div class="col-4">
+							<label>UomType</label>
+						</div>
+						<div class="col-3">
+							<select name="uomType">
+								<option value="">_SELECT_</option>
+								<option value="Packaging">Packaging</option>
+								<option value=" No Packaging">No Packaging</option>
+								<option value="">_NA_</option>
+							</select>
+
+						</div>
+						<div class="col-5">
+							<span id="uomTypeError"></span>
+						</div>
+
+
+						<div class="col-4">
+							<label>UomModel</label>
+						</div>
+
+						<div class="col-3">
+							<input type="text" name="uomModel" id="uomModel"
+								class="form-control">
+
+						</div>
+						<div class="col-5">
+							<span id="uomModelError"></span>
+						</div>
+
+						<div class="col-4">
+							<label>Description</label>
+						</div>
+						<div class="col-3">
+							<textarea name="uomDesc" class="form-control"></textarea>
+						</div>
+						<div class="col-5">
+							<span id="uomDescError"></span>
+						</div>
+
+					</div>
+
+					<input type="submit" value="CreateUom" class="btn btn-success" />
+				</form>
+
+				<div class="card-footer alert alert-success"
+					th:if="${message!=null}">
+
+					<span th:text="${message}"></span>
+					</div>
+					
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+		
+		 <script th:src="@{/js/uom.js}">
+		 
+		 </script>
+</body>
+</html>
