@@ -29,10 +29,12 @@ public class OrderMethod {
 	 private String orderCode;
 	@Column(name="order_type_col")
 	 private String orderType;
+	
 	@ElementCollection
 	@CollectionTable(name="order_acpt_tab",joinColumns = @JoinColumn(name="order_id_col"))
 	@Column(name="order_acpt_col")
 	 private Set<String> orderAcpt;
+	
 	@Column(name="order_desc_col")
 	 private String orderDesc;
 

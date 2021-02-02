@@ -51,4 +51,12 @@ public class OrderMethodServiceImpl implements OrderMethodService {
 		repo.save(om); //UPDATE SQL..
 	}
 
+	@Override
+	public boolean isOrderMethodExistByCode(String orderCode) {
+		/*Integer count = repo.getOrderMethodCountByCode(orderCode);
+		boolean exist = count>0? true:false;
+		return exist;*/
+		return  repo.getOrderMethodCountByCode(orderCode) > 0;
+		
+	}
 }

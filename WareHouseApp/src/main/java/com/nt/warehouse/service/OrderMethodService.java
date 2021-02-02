@@ -13,4 +13,5 @@ public interface OrderMethodService {
 	boolean isOrderMethodExist(Integer id);
 	Optional<OrderMethod> getOneOrderMethod(Integer id);
 	void updateOrderMethod(OrderMethod om); 
+	boolean isOrderMethodExistByCode(String orderCode);
 }
