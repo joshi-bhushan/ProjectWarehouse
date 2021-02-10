@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nt.warehouse.model.ShipmentType;
 import com.nt.warehouse.service.ShipmentTypeService;
+import com.nt.warehouse.view.ShipmentTypeExcelView;
+import com.nt.warehouse.view.ShipmentTypeOneExcelView;
 
 @Controller
 @RequestMapping("/st")
@@ -138,6 +141,38 @@ public class ShipmentTypeController {
 			//Go back to UI page
 			return "ShipmentTypeData";
 			
+	}
+	
+	
+	// EXCEL EXPORT
+	
+	@GetMapping("/excel")
+	public ModelAndView showExcelExport()
+	{
+		//fetch all rows from DB
+		
+		List<ShipmentType> list = service.getAllShipmentType();
+		
+		// create ModelAndView
+		ModelAndView m = new ModelAndView();
+		m.addObject("list",list);
+		m.setView(new ShipmentTypeExcelView());
+		return m;
+	}
+	
+	@GetMapping("/excelone")
+	public ModelAndView showExcelOneExport(@RequestParam("id")Integer sid)
+	{
+		// fetch all rows from DB
+		
+		Optional<ShipmentType> opt = service.getOneShipmentType(sid);
+		
+		//create modelAndView
+		ModelAndView m = new ModelAndView();
+		m.addObject("st",opt.get());
+		
+		m.setView(new ShipmentTypeOneExcelView());
+		return m;
 	}
 
 }

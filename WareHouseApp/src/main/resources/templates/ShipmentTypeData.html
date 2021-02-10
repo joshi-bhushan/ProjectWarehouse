@@ -15,6 +15,7 @@
 			</div>
 
 			<div class="card-body">
+			<a th:href="@{/st/excel}" class="btn btn-info">Excel Export</a>
 				<table class="table table-hover">
 					<tr class="bg-success text-white">
 						<th>ID</th>
@@ -37,7 +38,10 @@
 							<a th:href="@{/st/delete(id=${ob.id})}"  class="btn btn-danger"> DELETE </a>
 							|
 							<a th:href="@{/st/edit(id=${ob.id})}"  class="btn btn-warning"> EDIT </a>
+					        |
+					        <a th:href="@{/st/excelone(id=${ob.id})}"  class="btn btn-info"> EXCEL </a>
 						</td>
+						
 					</tr>
 				</table>
 
