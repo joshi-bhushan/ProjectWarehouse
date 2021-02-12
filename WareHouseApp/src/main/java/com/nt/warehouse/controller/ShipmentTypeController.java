@@ -3,6 +3,8 @@ package com.nt.warehouse.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nt.warehouse.model.ShipmentType;
 import com.nt.warehouse.service.ShipmentTypeService;
+import com.nt.warehouse.util.ShipmentTypeUtil;
 import com.nt.warehouse.view.ShipmentTypeExcelView;
 import com.nt.warehouse.view.ShipmentTypeOneExcelView;
+import com.nt.warehouse.view.ShipmentTypePdfView;
 
 @Controller
 @RequestMapping("/st")
@@ -25,6 +29,12 @@ public class ShipmentTypeController {
 
 	@Autowired
 	private ShipmentTypeService service;
+	
+	@Autowired
+	private ShipmentTypeUtil util;
+	
+	@Autowired
+	private ServletContext sc;
 
 	// show register page
 	@GetMapping("/register")
@@ -122,7 +132,7 @@ public class ShipmentTypeController {
 	// update shipment type
 	@PostMapping("/update")
 	public String doUpdateShipmentType(@ModelAttribute ShipmentType shipmentType ,Model model)
-	{
+	{ 
 		//call service update method
 		
 		 	service.updateShipmentType(shipmentType);
@@ -173,6 +183,45 @@ public class ShipmentTypeController {
 		
 		m.setView(new ShipmentTypeOneExcelView());
 		return m;
+	}
+	
+	
+	
+	// PDf EXPORT
+	@GetMapping("/pdf")
+	public ModelAndView exportToPdf()
+	{
+		// fetch all rows from DB
+		List<ShipmentType> list =service.getAllShipmentType();
+		
+		// create ModelAndView
+		
+		ModelAndView m = new ModelAndView();
+		m.addObject("list",list);
+		m.setView(new ShipmentTypePdfView());
+		return m;
+	}
+	
+	
+	
+	// charts
+	
+	@GetMapping("/charts")
+	public String showCharts() {
+		
+		// call service for data
+		List<Object[]> list = service.getShipmentTypeModeCount();
+		
+	
+		// dynamic path inside server(runtime location)
+				String path = sc.getRealPath("/"); //root location
+				System.out.println("Runtime location=>" + path);
+				
+				// call util method for generation
+				util.generatePieChart(path, list);
+				util.generateBarChart(path, list);
+				return "ShipmentTypeCharts.html";
+
 	}
 
 }

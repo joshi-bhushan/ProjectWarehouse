@@ -13,6 +13,7 @@ public interface ShipmentTypeService {
 	boolean isShipmentExit(Integer id);
 	Optional<ShipmentType> getOneShipmentType(Integer id);
 	void updateShipmentType(ShipmentType st);
-
+	List<Object[]> getShipmentTypeModeCount();
+	
 
 }

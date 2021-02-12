@@ -16,10 +16,14 @@ import com.nt.warehouse.util.AppUtil;
 public class ShipmentTypeOneExcelView extends AbstractXlsView {
 
 	@Override
-	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-response.addHeader("Content-Disposition", "attachment;filename=SHIPMENT"+AppUtil.getCurrentDateTime()+".xlsx");
+	protected void buildExcelDocument(
+			Map<String, Object> model, 
+			Workbook workbook, 
+			HttpServletRequest request,
+			HttpServletResponse response)
+					throws Exception {
+
+		response.addHeader("Content-Disposition", "attachment;filename=SHIPMENT"+AppUtil.getCurrentDateTime()+".xlsx");
 		
 		//read data from model
 		ShipmentType st = (ShipmentType) model.get("st");
@@ -51,7 +55,7 @@ response.addHeader("Content-Disposition", "attachment;filename=SHIPMENT"+AppUtil
 
 	}
 	
-
+	
 
 	}
 

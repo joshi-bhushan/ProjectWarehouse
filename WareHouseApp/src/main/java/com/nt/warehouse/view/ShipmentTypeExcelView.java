@@ -18,22 +18,27 @@ import com.nt.warehouse.util.AppUtil;
 public class ShipmentTypeExcelView extends AbstractXlsView {
 
 	@Override
-	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		// Modify file name
-		response.setHeader("Content-Disposition", "attachment;filename=SHIPMENTS"+AppUtil.getCurrentDateTime()+".xlsx");
-		// Read data from ModelAndView memory 
-		@SuppressWarnings("unchecked")
-		List<ShipmentType> list = (List<ShipmentType>)model.get("list");
+	protected void buildExcelDocument(
+			Map<String, Object> model, 
+			Workbook workbook, 
+			HttpServletRequest request,
+			HttpServletResponse response) 
+					throws Exception {
+		//Modify File Name
+		response.setHeader("Content-Disposition", "attachment;filename=SHIPMENTS-"+AppUtil.getCurrentDateTime()+".xlsx");
 		
-		// create one sheet using workbook
-		Sheet sheet= workbook.createSheet("SHIPMENTS");
-		//create one roe=w.(1st row in excel-Row#0)
+		//Read data from ModelAndView memory
+		@SuppressWarnings("unchecked")
+		List<ShipmentType> list = (List<ShipmentType>) model.get("list");
+		
+
+		//create one sheet using workbook
+		Sheet sheet = workbook.createSheet("SHIPMENTS");
+		
+		//create one row.(1st row in excel-Row#0)
 		setHead(sheet);
 		setBody(sheet,list);
 
-		
 	}
 	
 	/**
@@ -67,6 +72,5 @@ public class ShipmentTypeExcelView extends AbstractXlsView {
 		}
 	}
 	
-
 
 }
